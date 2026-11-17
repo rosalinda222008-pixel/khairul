@@ -852,8 +852,8 @@ header {
    ========================================================================== */
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: clamp(20px, 3vw, 28px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: clamp(18px, 2.5vw, 26px);
     align-items: stretch;
 }
 
@@ -861,11 +861,26 @@ header {
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
-    padding: clamp(28px, 4vw, 38px) clamp(20px, 3vw, 28px);
+    padding: clamp(26px, 3.5vw, 36px) clamp(18px, 2.5vw, 24px);
     display: flex;
     flex-direction: column;
     position: relative;
     transition: var(--transition);
+}
+
+.vip-tag {
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
 }
 
 .price-card:hover {

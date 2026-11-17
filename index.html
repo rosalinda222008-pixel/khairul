@@ -191,45 +191,60 @@
             <h2 class="section-title reveal">Program Personal Training Bersama Coach Khairul</h2>
             <p class="section-subtitle reveal">Pilih metode pendampingan yang paling tepat untuk gaya hidup dan kebutuhan Anda.</p>
             <div class="pricing-grid">
-                <!-- Paket 1 -->
+                <!-- Paket 1: Reguler Sekali Pertemuan -->
                 <div class="price-card reveal reveal-delay-1">
-                    <h3>Online Coaching</h3>
-                    <p class="price">Rp 450.000<span>/bulan</span></p>
+                    <h3>Reguler (Harian)</h3>
+                    <p class="price">Rp 20.000<span>/sesi</span></p>
                     <ul>
-                        <li>Custom Meal Plan (Bulking / Cutting)</li>
-                        <li>Program Latihan Gym / Rumah Terstruktur</li>
-                        <li>Evaluasi Progres Mingguan & Koreksi Form Video</li>
-                        <li>Konsultasi WhatsApp 24/7 Langsung dengan Coach</li>
+                        <li>1 Sesi Latihan Tatap Muka di Gym</li>
+                        <li>Panduan Teknik & Form Gerakan Dasar</li>
+                        <li>Koreksi Postur & Penggunaan Alat Gym</li>
+                        <li>Konsultasi Singkat Target Latihan</li>
                     </ul>
-                    <a href="#kontak" class="btn outline">Pilih Online</a>
+                    <a href="#kontak" class="btn outline">Pilih Sesi 20k</a>
                 </div>
 
-                <!-- Paket 2 (Featured) -->
-                <div class="price-card featured reveal reveal-delay-2">
-                    <div class="popular-badge">Paling Populer</div>
-                    <h3>1-on-1 Private Gym</h3>
-                    <p class="price">Rp 1.500.000<span>/12 Sesi</span></p>
+                <!-- Paket 2: Reguler Paket Sebulan -->
+                <div class="price-card reveal reveal-delay-2">
+                    <h3>Reguler (Sebulan)</h3>
+                    <p class="price">Rp 200.000<span>/bulan</span></p>
                     <ul>
-                        <li>Pendampingan Langsung Tatap Muka di Gym</li>
-                        <li>Koreksi Teknik Gerakan & Eksekusi Beban Aman</li>
-                        <li>Meal Plan & Panduan Nutrisi Harian</li>
-                        <li>Monitoring Body Fat & Massa Otot Berkala</li>
-                        <li>Bonus Panduan Suplemen & Mindset Fitness</li>
+                        <li>Pendampingan Rutin Latihan Gym 1 Bulan</li>
+                        <li>Rencana Latihan (Split Workout) Terstruktur</li>
+                        <li>Panduan Pola Makan Dasar (Bulking/Cutting)</li>
+                        <li>Monitoring Progres Berat Badan Berkala</li>
+                        <li>Konsultasi WhatsApp Seputar Latihan</li>
                     </ul>
-                    <a href="#kontak" class="btn primary">Daftar Private Gym</a>
+                    <a href="#kontak" class="btn outline">Pilih Paket 200k</a>
                 </div>
 
-                <!-- Paket 3 -->
+                <!-- Paket 3: VIP Sekali Pertemuan -->
                 <div class="price-card reveal reveal-delay-3">
-                    <h3>Transformasi 3 Bulan (VIP)</h3>
-                    <p class="price">Rp 3.500.000<span>/3 Bulan</span></p>
+                    <div class="vip-tag">VIP Sesi</div>
+                    <h3>VIP (Harian)</h3>
+                    <p class="price">Rp 60.000<span>/sesi</span></p>
                     <ul>
-                        <li>36 Sesi Private Coaching Langsung</li>
-                        <li>Jaminan Evaluasi Target Progresif BB & Otot</li>
-                        <li>Akses Prioritas Konsultasi & Nutrisi Khusus</li>
-                        <li>Rencana Latihan Jangka Panjang Pasca-Program</li>
+                        <li>1 Sesi Privat Eksklusif Intensif (1-on-1)</li>
+                        <li>Analisis Biomekanik & Koreksi Beban Bebas</li>
+                        <li>Spotting & Bantuan Teknik Angkat Maksimal</li>
+                        <li>Konsultasi Nutrisi & Rekomendasi Suplemen</li>
                     </ul>
-                    <a href="#kontak" class="btn outline">Pilih VIP</a>
+                    <a href="#kontak" class="btn outline">Pilih VIP 60k</a>
+                </div>
+
+                <!-- Paket 4: VIP Paket Sebulan (Featured) -->
+                <div class="price-card featured reveal reveal-delay-1">
+                    <div class="popular-badge">Paling Lengkap & Hemat</div>
+                    <h3>VIP (Sebulan)</h3>
+                    <p class="price">Rp 500.000<span>/bulan</span></p>
+                    <ul>
+                        <li>Pendampingan Penuh 1-on-1 Intensif 1 Bulan</li>
+                        <li>Custom Meal Plan Spesifik (Bulking / Cutting)</li>
+                        <li>Evaluasi Progres Mingguan & Cek Body Fat</li>
+                        <li>Program Hypertrophy & Progressive Overload Khusus</li>
+                        <li>Prioritas Konsultasi WhatsApp 24/7 Langsung</li>
+                    </ul>
+                    <a href="#kontak" class="btn primary">Daftar VIP 500k</a>
                 </div>
             </div>
         </div>
@@ -295,12 +310,13 @@
                 <input type="text" name="name" placeholder="Nama Lengkap Anda" required>
                 <input type="tel" name="phone" placeholder="Nomor WhatsApp (Aktif)" required>
                 <select name="program_interest" required>
-                    <option value="" disabled selected>Pilih Program yang Diinginkan</option>
+                    <option value="" disabled selected>Pilih Paket / Program yang Diinginkan</option>
+                    <option value="reguler-harian">Reguler - Sekali Pertemuan (Rp 20.000)</option>
+                    <option value="reguler-sebulan">Reguler - Paket Sebulan (Rp 200.000)</option>
+                    <option value="vip-harian">VIP - Sekali Pertemuan (Rp 60.000)</option>
+                    <option value="vip-sebulan">VIP - Paket Sebulan (Rp 500.000)</option>
                     <option value="bulking">Diet & Program Tambah Berat Badan (Bulking)</option>
-                    <option value="cutting">Diet Turun Lemak & BB (Cutting)</option>
-                    <option value="private-gym">Private PT Gym Tatap Muka</option>
                     <option value="senior-fitness">Program Kebugaran Orang Tua / Lansia</option>
-                    <option value="online-coaching">Online Coaching</option>
                 </select>
                 <textarea name="message" rows="4" placeholder="Ceritakan kondisi tubuh Anda saat ini (Berat badan, tinggi, kendala makan, atau tujuan fitness...)" required></textarea>
                 <button type="submit" class="btn primary">Kirim via WhatsApp</button>
