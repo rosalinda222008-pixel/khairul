@@ -24,7 +24,7 @@
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 22px;
-    --transition: all 0.25s ease-in-out;
+    --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -70,6 +70,24 @@ img {
     display: block;
 }
 
+/* ==========================================================================
+   Scroll Progress Indicator
+   ========================================================================== */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3.5px;
+    width: 0%;
+    background: linear-gradient(90deg, #f97316, #fbbf24, #10b981);
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
+    transition: width 0.1s ease-out;
+}
+
+/* ==========================================================================
+   Layout & Container
+   ========================================================================== */
 .container {
     width: 100%;
     max-width: 1140px;
@@ -105,7 +123,7 @@ img {
 }
 
 /* ==========================================================================
-   Header & Navbar (with Mobile Toggle Support)
+   Header & Navbar (with Mobile Toggle)
    ========================================================================== */
 header {
     position: sticky;
@@ -132,6 +150,11 @@ header {
     font-weight: 800;
     letter-spacing: 1px;
     z-index: 1001;
+    transition: transform 0.25s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.03);
 }
 
 .navbar .logo span {
@@ -155,8 +178,23 @@ header {
     padding: 6px 0;
 }
 
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
 .nav-links a:hover {
     color: var(--primary);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 /* Hamburger Button */
@@ -194,7 +232,7 @@ header {
 }
 
 /* ==========================================================================
-   Hero Section
+   Hero Section & Entrance Animations
    ========================================================================== */
 .hero {
     position: relative;
@@ -205,6 +243,7 @@ header {
     text-align: center;
     padding: clamp(70px, 10vw, 110px) clamp(16px, 4vw, 24px);
     background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    overflow: hidden;
 }
 
 .hero-overlay {
@@ -220,6 +259,38 @@ header {
     width: 100%;
 }
 
+/* Hero Entrance Keyframes */
+@keyframes heroBadgeAnim {
+    0% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes heroTextAnim {
+    0% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+    50% { box-shadow: 0 0 16px 2px rgba(249, 115, 22, 0.25); }
+}
+
+.hero-animate-badge {
+    animation: heroBadgeAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-animate-title {
+    animation: heroTextAnim 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.hero-animate-desc {
+    animation: heroTextAnim 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-animate-btn {
+    animation: heroTextAnim 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
 .hero-content .badge {
     display: inline-block;
     background-color: rgba(249, 115, 22, 0.15);
@@ -228,11 +299,12 @@ header {
     font-size: clamp(0.7rem, 2vw, 0.82rem);
     font-weight: 700;
     letter-spacing: 1.2px;
-    padding: 6px 16px;
+    padding: 7px 18px;
     border-radius: 9999px;
     margin-bottom: 20px;
     max-width: 100%;
     line-height: 1.4;
+    animation: pulseGlow 3s infinite;
 }
 
 .hero-content h1 {
@@ -258,7 +330,12 @@ header {
     flex-wrap: wrap;
 }
 
+/* ==========================================================================
+   Buttons with Shiny Hover Reflection
+   ========================================================================== */
 .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -276,6 +353,24 @@ header {
     white-space: nowrap;
 }
 
+/* Light Sheen Sweep Effect on Hover */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -70%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: rotate(30deg);
+    transition: all 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+}
+
+.btn:hover::after {
+    left: 130%;
+}
+
 .btn.primary {
     background-color: var(--primary);
     color: #ffffff;
@@ -284,8 +379,8 @@ header {
 
 .btn.primary:hover {
     background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(249, 115, 22, 0.55);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.6);
 }
 
 .btn.secondary {
@@ -297,7 +392,8 @@ header {
 .btn.secondary:hover {
     border-color: var(--primary);
     color: var(--primary);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    background-color: rgba(249, 115, 22, 0.08);
 }
 
 .btn.outline {
@@ -310,6 +406,34 @@ header {
     border-color: var(--primary);
     color: var(--primary);
     background-color: rgba(249, 115, 22, 0.08);
+    transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   Scroll Reveal Animation System
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 {
+    transition-delay: 0.12s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.24s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.36s;
 }
 
 /* ==========================================================================
@@ -333,8 +457,9 @@ header {
 }
 
 .program-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     border-color: #64748b;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 
 .card-header {
@@ -344,6 +469,7 @@ header {
     align-items: center;
     gap: 12px;
     border-bottom: 1px solid var(--card-border);
+    transition: var(--transition);
 }
 
 .card-header.bulking {
@@ -412,6 +538,12 @@ header {
     font-size: clamp(0.88rem, 1.8vw, 0.94rem);
     color: var(--text-gray);
     line-height: 1.6;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.checklist li:hover {
+    transform: translateX(4px);
+    color: #e2e8f0;
 }
 
 .checklist li strong {
@@ -448,7 +580,8 @@ header {
 
 .gender-card:hover {
     border-color: var(--primary);
-    transform: translateY(-3px);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(249, 115, 22, 0.15);
 }
 
 .gender-icon {
@@ -463,6 +596,11 @@ header {
     font-weight: 800;
     border-radius: var(--radius-sm);
     margin-bottom: 16px;
+    transition: transform 0.35s ease;
+}
+
+.gender-card:hover .gender-icon {
+    transform: rotate(10deg) scale(1.15);
 }
 
 .gender-card h3 {
@@ -494,6 +632,11 @@ header {
     font-size: clamp(0.88rem, 1.8vw, 0.94rem);
     color: var(--text-gray);
     line-height: 1.6;
+    transition: transform 0.2s ease;
+}
+
+.gender-card ul li:hover {
+    transform: translateX(4px);
 }
 
 .gender-card ul li strong {
@@ -531,8 +674,9 @@ header {
 }
 
 .price-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
     border-color: #64748b;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
 .price-card.featured {
@@ -541,20 +685,32 @@ header {
     box-shadow: 0 10px 30px rgba(249, 115, 22, 0.2);
 }
 
+.price-card.featured:hover {
+    box-shadow: 0 18px 45px rgba(249, 115, 22, 0.35);
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
 .popular-badge {
     position: absolute;
     top: -13px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary);
+    background: linear-gradient(90deg, #f97316 0%, #fb923c 50%, #f97316 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
     color: #ffffff;
     font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 4px 14px;
+    padding: 5px 16px;
     border-radius: 9999px;
     white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
 }
 
 .price-card h3 {
@@ -621,6 +777,11 @@ header {
     flex-direction: column;
     gap: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: var(--transition);
+}
+
+.contact-form:hover {
+    border-color: #475569;
 }
 
 .contact-form input,
@@ -633,7 +794,7 @@ header {
     border-radius: var(--radius-sm);
     color: var(--text-white);
     font-family: var(--font-body);
-    font-size: 16px; /* Mencegah auto zoom pada iOS Safari */
+    font-size: 16px;
     transition: var(--transition);
 }
 
@@ -642,7 +803,8 @@ header {
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
+    background-color: #0b1120;
 }
 
 .contact-form select {
@@ -710,29 +872,58 @@ footer p {
 }
 
 /* ==========================================================================
-   Floating WhatsApp Button
+   Floating WhatsApp Button with Pulsing Wave Effect
    ========================================================================== */
-.floating-wa {
+.floating-wa-wrapper {
     position: fixed;
     bottom: clamp(18px, 4vw, 28px);
     right: clamp(18px, 4vw, 28px);
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulseWave {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+.wa-pulse-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: rgba(37, 211, 102, 0.45);
+    animation: pulseWave 2s infinite ease-out;
+    pointer-events: none;
+}
+
+.floating-wa {
+    position: relative;
+    width: 100%;
+    height: 100%;
     background-color: #25d366;
     color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
-    z-index: 999;
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.5);
     transition: var(--transition);
 }
 
 .floating-wa:hover {
     background-color: #20ba59;
-    transform: scale(1.08) translateY(-2px);
-    box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.7);
 }
 
 /* ==========================================================================
@@ -801,9 +992,9 @@ footer p {
         gap: 8px;
     }
 
-    .floating-wa {
-        width: 48px;
-        height: 48px;
+    .floating-wa-wrapper {
+        width: 50px;
+        height: 50px;
     }
 
     .floating-wa svg {
