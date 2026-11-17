@@ -189,11 +189,13 @@ header {
     transition: width 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active-link {
     color: var(--primary);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
     width: 100%;
 }
 
@@ -250,11 +252,50 @@ header {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(9, 13, 22, 0.96) 100%);
+    z-index: 1;
+}
+
+/* Ambient Floating Glowing Orbs */
+.hero-ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+}
+
+.orb-1 {
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.6) 0%, rgba(249, 115, 22, 0) 70%);
+    top: 10%;
+    left: 10%;
+    animation: floatOrb1 12s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, rgba(16, 185, 129, 0) 70%);
+    bottom: 5%;
+    right: 10%;
+    animation: floatOrb2 14s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, 40px) scale(1.15); }
+}
+
+@keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1.1); }
+    100% { transform: translate(-50px, -35px) scale(0.95); }
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 840px;
     width: 100%;
 }
@@ -434,6 +475,82 @@ header {
 
 .reveal-delay-3 {
     transition-delay: 0.36s;
+}
+
+/* ==========================================================================
+   Stats Banner Counter Section (Moving Numbers)
+   ========================================================================== */
+.stats-banner {
+    background-color: #0b1120;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    padding: clamp(36px, 5vw, 54px) 0;
+    position: relative;
+    z-index: 5;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+}
+
+.stat-card {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: clamp(20px, 3vw, 28px) 16px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+    box-shadow: 0 12px 30px rgba(249, 115, 22, 0.18);
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
+}
+
+.stat-number-wrapper {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.8vw, 2.9rem);
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.stat-number {
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-suffix {
+    color: #fb923c;
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: clamp(0.82rem, 1.6vw, 0.92rem);
+    color: var(--text-gray);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+@media (max-width: 868px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ==========================================================================

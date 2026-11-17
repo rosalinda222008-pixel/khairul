@@ -34,6 +34,8 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-overlay"></div>
+        <div class="hero-ambient-orb orb-1"></div>
+        <div class="hero-ambient-orb orb-2"></div>
         <div class="hero-content">
             <span class="badge hero-animate-badge">CERTIFIED PERSONAL TRAINER &bull; FITNESS ENTHUSIAST</span>
             <h1 class="hero-animate-title">Bentuk Tubuh Ideal & Kuat Bersama Coach Khairul</h1>
@@ -41,6 +43,38 @@
             <div class="hero-buttons hero-animate-btn">
                 <a href="#program" class="btn primary">Pelajari Panduan Diet</a>
                 <a href="#kontak" class="btn secondary">Mulai Konsultasi PT</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner Counter Section -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+                    </div>
+                    <p class="stat-label">Klien Bertransformasi</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-1">
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
+                    </div>
+                    <p class="stat-label">Tingkat Keberhasilan BB</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-2">
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+ Thn</span>
+                    </div>
+                    <p class="stat-label">Pengalaman & Passion Gym</p>
+                </div>
+                <div class="stat-card reveal reveal-delay-3">
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    </div>
+                    <p class="stat-label">Metode Berbasis Riset</p>
+                </div>
             </div>
         </div>
     </section>
@@ -295,7 +329,75 @@
             revealElements.forEach(el => el.classList.add('active'));
         }
 
-        // 4. Form Submit Direct to WhatsApp
+        // 4. Animated Live Number Counter
+        const statCards = document.querySelectorAll('.stat-card');
+        let countersStarted = false;
+
+        function runCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(num => {
+                const target = +num.getAttribute('data-target');
+                const duration = 1800; // ms
+                const startTime = performance.now();
+
+                function updateCount(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease-out curve
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    const currentVal = Math.floor(easeProgress * target);
+
+                    num.textContent = currentVal;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        num.textContent = target;
+                    }
+                }
+
+                requestAnimationFrame(updateCount);
+            });
+        }
+
+        const statsSection = document.querySelector('.stats-banner');
+        if (statsSection && 'IntersectionObserver' in window) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    runCounters();
+                    statsObserver.unobserve(statsSection);
+                }
+            }, { threshold: 0.3 });
+            statsObserver.observe(statsSection);
+        } else {
+            runCounters();
+        }
+
+        // 5. ScrollSpy (Active Navigation Link on Scroll)
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 120;
+                const sectionId = current.getAttribute('id');
+                const navItem = document.querySelector(`.nav-links a[href*="${sectionId}"]`);
+
+                if (navItem) {
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        navItem.classList.add('active-link');
+                    } else {
+                        navItem.classList.remove('active-link');
+                    }
+                }
+            });
+        }, { passive: true });
+
+        // 6. Form Submit Direct to WhatsApp
         const consultForm = document.getElementById('consultationForm');
         if (consultForm) {
             consultForm.addEventListener('submit', (e) => {
