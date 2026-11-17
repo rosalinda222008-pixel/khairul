@@ -26,6 +26,7 @@
                 <li><a href="#program">Program Diet & BB</a></li>
                 <li><a href="#angkat-beban">Angkat Beban</a></li>
                 <li><a href="#paket">Paket Coaching</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#kontak">Konsultasi</a></li>
             </ul>
         </nav>
@@ -36,9 +37,18 @@
         <div class="hero-overlay"></div>
         <div class="hero-ambient-orb orb-1"></div>
         <div class="hero-ambient-orb orb-2"></div>
+        
+        <!-- Floating Fitness Particles -->
+        <div class="hero-floating-elements">
+            <span class="float-item item-1">⚡</span>
+            <span class="float-item item-2">🔥</span>
+            <span class="float-item item-3">💪</span>
+            <span class="float-item item-4">🏋️‍♂️</span>
+        </div>
+
         <div class="hero-content">
             <span class="badge hero-animate-badge">CERTIFIED PERSONAL TRAINER &bull; FITNESS ENTHUSIAST</span>
-            <h1 class="hero-animate-title">Bentuk Tubuh Ideal & Kuat Bersama Coach Khairul</h1>
+            <h1 class="hero-animate-title">Bentuk Tubuh <span class="gradient-text">Ideal & Kuat</span> Bersama Coach Khairul</h1>
             <p class="hero-animate-desc">Berawal dari hobi fitness bertahun-tahun, kini saya mendedikasikan diri sebagai Personal Trainer (PT) profesional untuk memandu Anda menaikkan berat badan (bulking), membakar lemak (cutting), dan membangun otot secara ilmiah tanpa diet menyiksa.</p>
             <div class="hero-buttons hero-animate-btn">
                 <a href="#program" class="btn primary">Pelajari Panduan Diet</a>
@@ -220,6 +230,56 @@
                         <li>Rencana Latihan Jangka Panjang Pasca-Program</li>
                     </ul>
                     <a href="#kontak" class="btn outline">Pilih VIP</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">Pertanyaan Umum (FAQ)</h2>
+            <p class="section-subtitle reveal">Jawaban seputar latihan gym, diet penambah berat badan, dan program coaching.</p>
+
+            <div class="faq-accordion reveal">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Berapa lama waktu yang dibutuhkan untuk melihat hasil bulking?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dengan surplus kalori yang konsisten dan program latihan terukur, kenaikan massa otot dan berat badan sehat biasanya mulai terlihat jelas dalam 4 hingga 8 minggu pertama (rata-rata kenaikan 1.5 – 2.5 kg per bulan tanpa lemak berlebih).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Saya belum pernah ke gym sama sekali, apakah bisa ikut?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sangat bisa! Justru dengan bimbingan Personal Trainer, Anda akan diajarkan teknik dasar, postur beban yang aman, dan pemilihan alat gym yang tepat sejak hari pertama untuk mencegah cedera.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Bagaimana jika saya tipe orang yang susah makan banyak?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Coach Khairul akan memberikan strategi khusus: pembagian porsi makan 4–5 kali sehari, resep <em>smoothie kalori tinggi</em> yang mudah diminum, serta trik memilih makanan padat nutrisi tanpa rasa begah berlebihan.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Apakah orang tua atau lansia aman mengikuti latihan angkat beban?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sangat aman dan sangat dianjurkan secara medis. Latihan disesuaikan dengan kondisi fisik lansia (beban adaptif) untuk memperkuat sendi lutut, mencegah osteoporosis, dan melatih keseimbangan tubuh agar tidak mudah jatuh.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -415,6 +475,43 @@
 
                 const waUrl = `https://wa.me/6283193063683?text=${encodeURIComponent(waMessage)}`;
                 window.open(waUrl, '_blank');
+            });
+        }
+
+        // 7. Interactive Animated FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const questionBtn = item.querySelector('.faq-question');
+            if (questionBtn) {
+                questionBtn.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        // 8. Dynamic 3D Tilt Card Animation (For Large Screens)
+        if (window.matchMedia('(min-width: 992px)').matches) {
+            const tiltCards = document.querySelectorAll('.program-card, .price-card, .stat-card, .gender-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
             });
         }
     </script>
